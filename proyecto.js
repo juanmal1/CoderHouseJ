@@ -10,7 +10,7 @@ class producto {
 }
 
 
-
+/*-----------------------------PRODUCTOS-----------------*/
 const producto1 = new producto("Top Cat", 1, 1, "./media/SofiLBdia1win20220138rew_720x.webp", 14850, 2 );
 const producto2 = new producto("Top ido", 2, 1, "./media/sofia-Lb-dia-4--win-225639_720x.webp", 15850, 1 );
 const producto3 = new producto("Top Cat B", 3, 1, "./media/SofiLBdia2Win20232660rew_720x.webp", 12850, 3 );
@@ -39,7 +39,7 @@ productos.push(producto1);
 productos.push(producto2);
 productos.push(producto3);
 
-
+/*---------------- NODO PRODUCTOS------------*/
 function mostrarProductos(productos) {
     const contenedorProductos = document.getElementById("contenedor-productos");
     
@@ -71,7 +71,7 @@ function mostrarProductos(productos) {
 mostrarProductos(productos);
 
 
-
+/*---------------- AGREGAR O QUITAR DEL CARRITO--------------------*/
 const agregarCarrito = (prodId) =>{
     const existe =carrito.some (producto => producto.id ===prodId)
     
@@ -95,7 +95,7 @@ const eliminarCarrito = (prodId) => {
     actualizarCarrito()
 }
 
-
+/*-------------CARRITO-------------*/
 const actualizarCarrito = () => {
     contenedorCarrito.innerHTML = ""
 
@@ -113,7 +113,6 @@ const actualizarCarrito = () => {
         
         
     })
-    
     contadorCarrito.innerText = carrito.length
 
     localStorage.setItem(carrito, JSON.stringify(carrito))
@@ -127,6 +126,9 @@ function guardar(){
     let data = localStorage.getItem('carrito');
     let devolverCarrito = JSON.parse(data);
 }
+
+
+
 
 /*----------CARRITO MODEL---------*/
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
