@@ -111,21 +111,22 @@ const actualizarCarrito = () => {
         contenedorCarrito.appendChild(div)
 
         
+        
     })
-    contadorCarrito.innerText = carrito.length
     
+    contadorCarrito.innerText = carrito.length
+
+    localStorage.setItem(carrito, JSON.stringify(carrito))
+
     console.log(carrito)
     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0)
 }
 
-let carritoLocalStorage =JSON.parse(localStorage.getItem('carrito'))
-if (carritoLocalStorage ) {
-    carrito= carritoLocalStorage
-}else {
-    carrito= []
+
+function guardar(){
+    let data = localStorage.getItem('carrito');
+    let devolverCarrito = JSON.parse(data);
 }
-
-
 
 /*----------CARRITO MODEL---------*/
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
