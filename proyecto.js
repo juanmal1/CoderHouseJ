@@ -21,16 +21,13 @@ const contenedorCarrito = document.getElementById('carrito-contenedor')
 const botonVaciar = document.getElementById('vaciar-carrito')
 const contadorCarrito = document.getElementById('contadorCarrito')
 const precioTotal = document.getElementById('precioTotal')
+const cantidad = document.getElementById('cantidad')
+const cantidadTotal = document.getElementById('cantidadTotal')
 
 const productos = []
 const carrito = []
 
-document.addEventListener('DOMContentLoaded', ()=>{
-    if (localStorage.getItem('carrito')){
-        carrito = JSON.parse(localStorage.getItem('carrito'))
-        actualizarCarrito()
-    }
-})
+
 
 botonVaciar.addEventListener('click', () =>{
     carrito.length = 0
@@ -45,6 +42,7 @@ productos.push(producto3);
 
 function mostrarProductos(productos) {
     const contenedorProductos = document.getElementById("contenedor-productos");
+    
     contenedorProductos.innerHTML= "";
 
     productos.forEach(producto => {
@@ -59,6 +57,8 @@ function mostrarProductos(productos) {
         `
     
     contenedorProductos.appendChild(divProducto);
+    
+    
 
     const boton = document.getElementById(`agregar ${producto.id}`)
 
@@ -76,7 +76,7 @@ const agregarCarrito = (prodId) =>{
     const existe =carrito.some (producto => producto.id ===prodId)
     
     if(existe){
-        const producto = carrito.map(producto => {
+            producto = carrito.map(producto => {
             if(producto.id === prodId){
                 producto.cantidad++
             }
@@ -109,13 +109,19 @@ const actualizarCarrito = () => {
         <button onclick = "eliminarDelCarrito(${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
         `
         contenedorCarrito.appendChild(div)
+
+        function guardarCarrito() {
+            if(localStorage.getItem("carrito"))
+            localStorage.setItem('carrito',('[]'))
+        }
+
         
-        localStorage.setItem('carrito', JSON.stringify(carrito))
     })
     contadorCarrito.innerText = carrito.length
-    precioTotal.innerText = carrito.reduce((acc, producto)=> acc +producto.precio, 0)
+    
+    console.log(carrito)
+    precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0)
 }
-
 
 /*----------CARRITO MODEL---------*/
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
@@ -138,3 +144,15 @@ contenedorModal.addEventListener('click', (event) =>{
 modalCarrito.addEventListener('click', (event) => {
     event.stopPropagation() 
 })
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     if (localStorage.getItem('carrito')){
+//         carrito = JSON.parse(localStorage.getItem('carrito'))
+//         actualizarCarrito()
+//     }
+// })
+
+function guardarCarrito() {
+    if(localStorage.getItem("carrito"))
+    localStorage.setItem('carrito',('[]'))
+}
