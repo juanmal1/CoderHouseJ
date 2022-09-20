@@ -69,7 +69,7 @@ function mostrarProductos(productos) {
     });
 }
 mostrarProductos(productos);
-    
+
 
 
 const agregarCarrito = (prodId) =>{
@@ -110,11 +110,6 @@ const actualizarCarrito = () => {
         `
         contenedorCarrito.appendChild(div)
 
-        function guardarCarrito() {
-            if(localStorage.getItem("carrito"))
-            localStorage.setItem('carrito',('[]'))
-        }
-
         
     })
     contadorCarrito.innerText = carrito.length
@@ -122,6 +117,15 @@ const actualizarCarrito = () => {
     console.log(carrito)
     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0)
 }
+
+let carritoLocalStorage =JSON.parse(localStorage.getItem('carrito'))
+if (carritoLocalStorage ) {
+    carrito= carritoLocalStorage
+}else {
+    carrito= []
+}
+
+
 
 /*----------CARRITO MODEL---------*/
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
@@ -145,14 +149,3 @@ modalCarrito.addEventListener('click', (event) => {
     event.stopPropagation() 
 })
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     if (localStorage.getItem('carrito')){
-//         carrito = JSON.parse(localStorage.getItem('carrito'))
-//         actualizarCarrito()
-//     }
-// })
-
-function guardarCarrito() {
-    if(localStorage.getItem("carrito"))
-    localStorage.setItem('carrito',('[]'))
-}
