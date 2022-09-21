@@ -24,6 +24,8 @@ const precioTotal = document.getElementById('precioTotal')
 const cantidad = document.getElementById('cantidad')
 const cantidadTotal = document.getElementById('cantidadTotal')
 
+const precioCuotas = document.getElementById('cuotas')
+
 const productos = []
 const carrito = []
 
