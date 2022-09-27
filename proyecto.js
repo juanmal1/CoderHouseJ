@@ -58,7 +58,7 @@ function actualizarCarrito() {
     console.log(carrito);
     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0);
 
-    precioCuotas.innerText = carrito.reduce((acc, producto) => acc + producto.precio / 12, 0)
+    precioCuotas.innerText = carrito.reduce((acc, producto) => acc + producto.precio / 12, 0).toFixed()
 }
 
 const productos = [];
