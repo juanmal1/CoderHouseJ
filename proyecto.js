@@ -13,6 +13,10 @@ class producto {
 const producto1 = new producto("Top Cat", 1, 1, "./media/SofiLBdia1win20220138rew_720x.webp", 14850, 2);
 const producto2 = new producto("Top ido", 2, 1, "./media/sofia-Lb-dia-4--win-225639_720x.webp", 15850, 1);
 const producto3 = new producto("Top Cat B", 3, 1, "./media/SofiLBdia2Win20232660rew_720x.webp", 12850, 3);
+const producto4 = new producto("Botas", 4, 1, "./media/botas10.webp", 15000, 3);
+const producto5 = new producto("Top Mono", 5, 1, "./media/conjunto1.png", 16000, 3);
+const producto6 = new producto("Top Pantalon", 6, 1, "./media/conjunto2.png", 18000, 3);
+
 
 /*-----------ID traidos del html---------*/
 
@@ -24,7 +28,6 @@ const cantidad = document.getElementById("cantidad");
 const cantidadTotal = document.getElementById("cantidadTotal");
 const comprar = document.getElementById("comprar");
 const precioCuotas = document.getElementById("cuotas");
-
 
 /*----storage carrito-----*/
 
@@ -38,7 +41,7 @@ if (carrito != []) {
 /*-------------CARRITO-------------*/
 function actualizarCarrito() {
     contenedorCarrito.innerHTML = "";
-    console.log(carrito);
+
     carrito.forEach((producto) => {
         const div = document.createElement("div");
         div.className = "productoEnCarrito";
@@ -46,23 +49,45 @@ function actualizarCarrito() {
         <p>${producto.producto}</p>
         <p>Precio: $${producto.precio}</p>
         <p>Cantidad: <span id="cantidad">${producto.cantidad}</span></p>
-        <button onclick = "eliminarDelCarrito(${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+        <button onclick = "eliminarDelCarrito (${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
         `;
         contenedorCarrito.appendChild(div);
     });
 
     contadorCarrito.innerText = carrito.length;
 
-    localStorage.setItem(carrito, JSON.stringify(carrito));
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 
-    console.log(carrito);
+
     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0);
 
     precioCuotas.innerText = carrito.reduce((acc, producto) => acc + producto.precio / 12, 0).toFixed()
 }
 
 const productos = [];
+/*---------------- AGREGAR O QUITAR DEL CARRITO--------------------*/
+const agregarCarrito = (prodId) => {
+    const existe = carrito.some((producto) => producto.id === prodId);
 
+    if (existe) {
+        producto = carrito.map((producto) => {
+            if (producto.id === prodId) {
+                producto.cantidad++;
+            }
+        });
+    } else {
+        const item = productos.find((producto) => producto.id === prodId);
+        carrito.push(item);
+    }
+    actualizarCarrito();
+};
+
+const eliminarDelCarrito = (prodId) => {
+    const item = carrito.find((producto) => producto.id === prodId);
+    const indice = carrito.indexOf(item);
+    carrito.splice(indice, 1);
+    actualizarCarrito();
+};
 /*------------- evento dentro del carrito--------*/
 comprar.addEventListener("click", () => {
     Swal.fire({
@@ -90,6 +115,9 @@ botonVaciar.addEventListener("click", () => {
 productos.push(producto1);
 productos.push(producto2);
 productos.push(producto3);
+productos.push(producto4);
+productos.push(producto5);
+productos.push(producto6);
 
 /*---------------- NODO PRODUCTOS------------*/
 function mostrarProductos(productos) {
@@ -133,29 +161,7 @@ function mostrarProductos(productos) {
 }
 mostrarProductos(productos);
 
-/*---------------- AGREGAR O QUITAR DEL CARRITO--------------------*/
-const agregarCarrito = (prodId) => {
-    const existe = carrito.some((producto) => producto.id === prodId);
 
-    if (existe) {
-        producto = carrito.map((producto) => {
-            if (producto.id === prodId) {
-                producto.cantidad++;
-            }
-        });
-    } else {
-        const item = productos.find((producto) => producto.id === prodId);
-        carrito.push(item);
-    }
-    actualizarCarrito();
-};
-
-const eliminarCarrito = (prodId) => {
-    const item = carrito.find((producto) => producto.id === prodId);
-    const indice = carrito.indexOf(item);
-    carrito.splice(indice, 1);
-    actualizarCarrito();
-};
 
 // function guardar() {
 //     let data = localStorage.getItem("carrito");
