@@ -1,6 +1,15 @@
-
 [
     {"nombre":"Top Cat", "id":1,"cantidad": 1,"img": "./media/SofiLBdia1win20220138rew_720x.webp","precio": 14850,"stock": 2},
     {"nombre":"Top ido", "id":2,"cantidad": 1,"img": "./media/sofia-Lb-dia-4--win-225639_720x.webp","precio": 15850,"stock": 1},
-    {"nombre":"Top Cat B", "id":3,"cantidad": 1,"img": "./media/SofiLBdia2Win20232660rew_720x.webp","precio": 12850,"stock": 3}
+    {"nombre":"Top Cat B", "id":3,"cantidad": 1,"img": "./media/SofiLBdia2Win20232660rew_720x.webp","precio": 12850,"stock": 3},
+    {"nombre":"Top Cat", "id":4,"cantidad": 1,"img": "./media/Pantalon1.webp","precio": 14850,"stock": 2},
+    {"nombre":"Top ido", "id":5,"cantidad": 1,"img": "./media/conjunto1.png","precio": 15850,"stock": 1},
+    {"nombre":"Top Cat B", "id":6,"cantidad": 1,"img": "./media/conjunto2.png","precio": 12850,"stock": 3},
+    {"nombre":"Top Cat", "id":7,"cantidad": 1,"img": "./media/conjunto3.png","precio": 14850,"stock": 2},
+    {"nombre":"Top ido", "id":8,"cantidad": 1,"img": "./media/botas10.webp","precio": 15850,"stock": 1},
+    {"nombre":"Top Cat B", "id":9,"cantidad": 1,"img": "./media/botas1.webp","precio": 12850,"stock": 3},
+    {"nombre":"Top Cat", "id":10,"cantidad": 1,"img": "./media/botas2.webp","precio": 14850,"stock": 2},
+    {"nombre":"Top ido", "id":11,"cantidad": 1,"img": "./media/botas3.webp","precio": 15850,"stock": 1},
+    {"nombre":"Top Cat B", "id":12,"cantidad": 1,"img": "./media/botas4.webp","precio": 12850,"stock": 3}
+
 ]
