@@ -120,96 +120,96 @@ productos.push(producto5);
 productos.push(producto6);
 
 /*---------------- NODO PRODUCTOS------------*/
-// const getData = async () =>{
-//     const response = await fetch('./data.json');
-//     const data = await response.json();
-//     return data;
-// }
-
-//     const printPoducto = async()=>{
-//         const producto = await getData();
-
-//         productos.forEach((data) => {
-//             const divProducto = document.createElement("div");
-//             divProducto.classList.add("caja");
-//             divProducto.innerHTML = `
-//             <img src="${data.imagen}" alt="${data.img}">
-//             <p>${data.producto}</p>
-//             <p> Precio : $${data.precio}</p>
-//             <p> Stock: ${data.stock}</p>
-//             <button id="agregar ${data.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
-//             `
-//             contenedorProductos.appendChild(divProducto);
-
-            
-            
-//             const boton = document.getElementById(`agregar ${producto.id}`);
-        
-//             boton.addEventListener("click", () => {
-//                         Toastify({
-//                             text: "Agregaste el producto al carrito",
-//                             duration: 2500,
-//                             newWindow: true,
-//                             close: true,
-//                             gravity: "top", // `top` or `bottom`
-//                             position: "right", // `left`, `center` or `right`
-//                             stopOnFocus: true, // Prevents dismissing of toast on hover
-//                             style: {
-//                             background: "linear-gradient(to right, #000000, #771a53be)",
-//                             },
-//                             onClick: function(){} // Callback after click
-//                         }).showToast();
-//                         agregarCarrito(producto.id);
-//                     });
-    
-//         })
-//     }
-        
-// getData()
-        
-
-
-
-function mostrarProductos(productos) {
-    const contenedorProductos = document.getElementById("contenedor-productos");
-
-    contenedorProductos.innerHTML = "";
-
-    productos.forEach((producto) => {
-        const divProducto = document.createElement("div");
-        divProducto.classList.add("caja");
-        divProducto.innerHTML = `
-        <img src="${producto.imagen}" alt="${producto.producto}">
-        <p>${producto.producto}</p>
-        <p> Precio : $${producto.precio}</p>
-        <p> Stock: ${producto.stock}</p>
-        <button id="agregar ${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
-        `;
-
-        contenedorProductos.appendChild(divProducto);
-
-        const boton = document.getElementById(`agregar ${producto.id}`);
-
-        boton.addEventListener("click", () => {
-            Toastify({
-                text: "Agregaste el producto al carrito",
-                duration: 2500,
-                newWindow: true,
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                background: "linear-gradient(to right, #000000, #771a53be)",
-                },
-                onClick: function(){} // Callback after click
-            }).showToast();
-            agregarCarrito(producto.id);
-
-        });
-    });
+const getData = async () =>{
+    const response = await fetch('./data.json');
+    const data = await response.json();
+    return data;
 }
-mostrarProductos(productos);
+
+    const printPoducto = async()=>{
+        const producto = await getData();
+
+        productos.forEach((data) => {
+            const divProducto = document.createElement("div");
+            divProducto.classList.add("caja");
+            divProducto.innerHTML = `
+            <img src="${data.imagen}" alt="${data.img}">
+            <p>${data.producto}</p>
+            <p> Precio : $${data.precio}</p>
+            <p> Stock: ${data.stock}</p>
+            <button id="agregar ${data.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+            `
+            contenedorProductos.appendChild(divProducto);
+
+            
+            
+            const boton = document.getElementById(`agregar ${producto.id}`);
+        
+            boton.addEventListener("click", () => {
+                        Toastify({
+                            text: "Agregaste el producto al carrito",
+                            duration: 2500,
+                            newWindow: true,
+                            close: true,
+                            gravity: "top", // `top` or `bottom`
+                            position: "right", // `left`, `center` or `right`
+                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                            background: "linear-gradient(to right, #000000, #771a53be)",
+                            },
+                            onClick: function(){} // Callback after click
+                        }).showToast();
+                        agregarCarrito(producto.id);
+                    });
+    
+        })
+    }
+        
+getData(producto);
+        
+
+
+
+// function mostrarProductos(productos) {
+//     const contenedorProductos = document.getElementById("contenedor-productos");
+
+//     contenedorProductos.innerHTML = "";
+
+//     productos.forEach((producto) => {
+//         const divProducto = document.createElement("div");
+//         divProducto.classList.add("caja");
+//         divProducto.innerHTML = `
+//         <img src="${producto.imagen}" alt="${producto.producto}">
+//         <p>${producto.producto}</p>
+//         <p> Precio : $${producto.precio}</p>
+//         <p> Stock: ${producto.stock}</p>
+//         <button id="agregar ${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+//         `;
+
+//         contenedorProductos.appendChild(divProducto);
+
+//         const boton = document.getElementById(`agregar ${producto.id}`);
+
+//         boton.addEventListener("click", () => {
+//             Toastify({
+//                 text: "Agregaste el producto al carrito",
+//                 duration: 2500,
+//                 newWindow: true,
+//                 close: true,
+//                 gravity: "top", // `top` or `bottom`
+//                 position: "right", // `left`, `center` or `right`
+//                 stopOnFocus: true, // Prevents dismissing of toast on hover
+//                 style: {
+//                 background: "linear-gradient(to right, #000000, #771a53be)",
+//                 },
+//                 onClick: function(){} // Callback after click
+//             }).showToast();
+//             agregarCarrito(producto.id);
+
+//         });
+//     });
+// }
+// mostrarProductos(productos);
 
 
 
