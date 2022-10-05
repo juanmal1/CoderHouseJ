@@ -66,7 +66,7 @@
         "nombre":"Top Cat B", 
         "id":9,
         "cantidad": 1,
-        "img": "./media/botas1.webp",
+        "img": "./media/botas10.webp",
         "precio": 12850,
         "stock": 3
     },
@@ -74,7 +74,7 @@
         "nombre":"Top Cat", 
         "id":10,
         "cantidad": 1,
-        "img": "./media/botas2.webp",
+        "img": "./media/botas10.webp",
         "precio": 14850,
         "stock": 2
     },
@@ -82,7 +82,7 @@
         "nombre":"Top ido", 
         "id":11,
         "cantidad": 1,
-        "img": "./media/botas3.webp",
+        "img": "./media/botas10.webp",
         "precio": 15850,
         "stock": 1
     },
@@ -90,7 +90,7 @@
         "nombre":"Top Cat B", 
         "id":12,
         "cantidad": 1,
-        "img": "./media/botas4.webp",
+        "img": "./media/botas10.webp",
         "precio": 12850,
         "stock": 3
     }

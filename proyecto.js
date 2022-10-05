@@ -1,23 +1,3 @@
-class producto {
-    constructor(producto, id, cantidad, imagen, precio, stock) {
-        this.producto = producto;
-        this.id = id;
-        this.cantidad = cantidad;
-        this.imagen = imagen;
-        this.precio = precio;
-        this.stock = stock;
-    }
-}
-
-/*-----------------------------PRODUCTOS-----------------*/
-const producto1 = new producto("Top Cat", 1, 1, "./media/SofiLBdia1win20220138rew_720x.webp", 14850, 2);
-const producto2 = new producto("Top ido", 2, 1, "./media/sofia-Lb-dia-4--win-225639_720x.webp", 15850, 1);
-const producto3 = new producto("Top Cat B", 3, 1, "./media/SofiLBdia2Win20232660rew_720x.webp", 12850, 3);
-const producto4 = new producto("Botas", 4, 1, "./media/botas10.webp", 15000, 3);
-const producto5 = new producto("Top Mono", 5, 1, "./media/conjunto1.png", 16000, 3);
-const producto6 = new producto("Top Pantalon", 6, 1, "./media/conjunto2.png", 18000, 3);
-
-
 /*-----------ID traidos del html---------*/
 
 const contenedorCarrito = document.getElementById("carrito-contenedor");
@@ -41,12 +21,12 @@ if (carrito != []) {
 /*-------------CARRITO-------------*/
 function actualizarCarrito() {
     contenedorCarrito.innerHTML = "";
-
+    
     carrito.forEach((producto) => {
         const div = document.createElement("div");
         div.className = "productoEnCarrito";
         div.innerHTML = `
-        <p>${producto.producto}</p>
+        <p>${producto.nombre}</p>
         <p>Precio: $${producto.precio}</p>
         <p>Cantidad: <span id="cantidad">${producto.cantidad}</span></p>
         <button onclick = "eliminarDelCarrito (${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
@@ -64,13 +44,15 @@ function actualizarCarrito() {
     precioCuotas.innerText = carrito.reduce((acc, producto) => acc + producto.precio / 12, 0).toFixed()
 }
 
+
+
 const productos = [];
 /*---------------- AGREGAR O QUITAR DEL CARRITO--------------------*/
 const agregarCarrito = (prodId) => {
     const existe = carrito.some((producto) => producto.id === prodId);
 
     if (existe) {
-        producto = carrito.map((producto) => {
+        productos = carrito.map((producto) => {
             if (producto.id === prodId) {
                 producto.cantidad++;
             }
@@ -112,115 +94,55 @@ botonVaciar.addEventListener("click", () => {
     actualizarCarrito();
 });
 
-productos.push(producto1);
-productos.push(producto2);
-productos.push(producto3);
-productos.push(producto4);
-productos.push(producto5);
-productos.push(producto6);
 
 /*---------------- NODO PRODUCTOS------------*/
-const getData = async () =>{
-    const response = await fetch('./data.json');
-    const data = await response.json();
-    return data;
-}
+function mostrarDatos (){
 
-    const printPoducto = async()=>{
-        const producto = await getData();
+    const contenedorProductos = document.getElementById("contenedor-productos");
 
-        productos.forEach((data) => {
+    contenedorProductos.innerHTML = "";
+
+    fetch('./data.json')
+    .then(respuesta=> respuesta.json())
+    .then(productos=> {
+        productos.forEach(producto => {
             const divProducto = document.createElement("div");
             divProducto.classList.add("caja");
             divProducto.innerHTML = `
-            <img src="${data.imagen}" alt="${data.img}">
-            <p>${data.producto}</p>
-            <p> Precio : $${data.precio}</p>
-            <p> Stock: ${data.stock}</p>
-            <button id="agregar ${data.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
-            `
+            <img src="${producto.img}" alt="${producto.img}">
+            <p>${producto.nombre}</p>
+            <p> Precio : $${producto.precio}</p>
+            <p> Stock: ${producto.stock}</p>
+            <button id="agregar ${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+            `;
+    
             contenedorProductos.appendChild(divProducto);
 
-            
-            
-            const boton = document.getElementById(`agregar ${producto.id}`);
-        
-            boton.addEventListener("click", () => {
-                        Toastify({
-                            text: "Agregaste el producto al carrito",
-                            duration: 2500,
-                            newWindow: true,
-                            close: true,
-                            gravity: "top", // `top` or `bottom`
-                            position: "right", // `left`, `center` or `right`
-                            stopOnFocus: true, // Prevents dismissing of toast on hover
-                            style: {
-                            background: "linear-gradient(to right, #000000, #771a53be)",
-                            },
-                            onClick: function(){} // Callback after click
-                        }).showToast();
-                        agregarCarrito(producto.id);
-                    });
+            console.log(productos);
     
-        })
-    }
-        
-getData(producto);
-        
-
-
-
-// function mostrarProductos(productos) {
-//     const contenedorProductos = document.getElementById("contenedor-productos");
-
-//     contenedorProductos.innerHTML = "";
-
-//     productos.forEach((producto) => {
-//         const divProducto = document.createElement("div");
-//         divProducto.classList.add("caja");
-//         divProducto.innerHTML = `
-//         <img src="${producto.imagen}" alt="${producto.producto}">
-//         <p>${producto.producto}</p>
-//         <p> Precio : $${producto.precio}</p>
-//         <p> Stock: ${producto.stock}</p>
-//         <button id="agregar ${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
-//         `;
-
-//         contenedorProductos.appendChild(divProducto);
-
-//         const boton = document.getElementById(`agregar ${producto.id}`);
-
-//         boton.addEventListener("click", () => {
-//             Toastify({
-//                 text: "Agregaste el producto al carrito",
-//                 duration: 2500,
-//                 newWindow: true,
-//                 close: true,
-//                 gravity: "top", // `top` or `bottom`
-//                 position: "right", // `left`, `center` or `right`
-//                 stopOnFocus: true, // Prevents dismissing of toast on hover
-//                 style: {
-//                 background: "linear-gradient(to right, #000000, #771a53be)",
-//                 },
-//                 onClick: function(){} // Callback after click
-//             }).showToast();
-//             agregarCarrito(producto.id);
-
-//         });
-//     });
-// }
-// mostrarProductos(productos);
-
-
-
-// function guardar() {
-//     let data = localStorage.getItem("carrito");
-//     let devolverCarrito = JSON.parse(data);
-// }cS
-
-
-
-
+            const boton = document.getElementById(`agregar ${producto.id}`);
+    
+            boton.addEventListener("click", () => {
+                Toastify({
+                    text: "Agregaste el producto al carrito",
+                    duration: 2500,
+                    newWindow: true,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "right", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                    background: "linear-gradient(to right, #000000, #771a53be)",
+                    },
+                    onClick: function(){} // Callback after click
+                }).showToast();
+                
+                agregarCarrito(producto.id);
+        });
+    })
+})
+}
+mostrarDatos();
 /*--------Publicidad rapida----------*/
 
 Toastify({
