@@ -66,52 +66,6 @@ botonVaciar.addEventListener("click", () => {
     })
     actualizarCarrito();
 });
-function mostrarDatos (){
-const contenedorProductos = document.getElementById("contenedor-productos");
-
-contenedorProductos.innerHTML = "";
-const productos = async () =>{
-    const resp = await 
-    fetch ('./data.json')
-    const productos = await resp.json()
-    
-    productos.forEach((producto) => {
-        const divProducto = document.createElement("div");
-        divProducto.classList.add("caja");
-        divProducto.innerHTML = `
-        <img src="${producto.img}" alt="${producto.img}">
-        <p>${producto.nombre}</p>
-        <p> Precio : $${producto.precio}</p>
-        <p> Stock: ${producto.stock}</p>
-        <button id="agregar ${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
-        `;
-
-        contenedorProductos.appendChild(divProducto);
-
-        const boton = document.getElementById(`agregar ${producto.id}`);
-
-        boton.addEventListener("click", () => {
-            Toastify({
-                text: "Agregaste el producto al carrito",
-                duration: 2500,
-                newWindow: true,
-                close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                background: "linear-gradient(to right, #000000, #771a53be)",
-                },
-                onClick: function(){} // Callback after click
-            }).showToast();
-            agregarCarrito(producto.id);
-    });
-})
-}
-
-productos()
-}
-mostrarDatos()
 
 const agregarCarrito = (prodId) => {
     const existe = carrito.some((producto) => producto.id === prodId);
@@ -136,6 +90,75 @@ const eliminarDelCarrito = (prodId) => {
     carrito.splice(indice, 1);
     actualizarCarrito();
 };
+function mostrarDatos (){
+const contenedorProductos = document.getElementById("contenedor-productos");
+
+contenedorProductos.innerHTML = "";
+const productos = async () =>{
+    const resp = await fetch ('./data.json');
+    const productos = await resp.json()
+
+    productos.forEach((producto) => {
+        const divProducto = document.createElement("div");
+        divProducto.classList.add("caja");
+        divProducto.innerHTML = `
+        <img src="${producto.img}" alt="${producto.img}">
+        <p>${producto.nombre}</p>
+        <p> Precio : $${producto.precio}</p>
+        <p> Stock: ${producto.stock}</p>
+        <button id="agregar ${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+        `;
+
+        contenedorProductos.append(divProducto);
+
+        const boton = document.getElementById(`agregar ${producto.id}`);
+
+        boton.addEventListener("click", () => {
+            Toastify({
+                text: "Agregaste el producto al carrito",
+                duration: 2500,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                background: "linear-gradient(to right, #000000, #771a53be)",
+                },
+                onClick: function(){} // Callback after click
+            }).showToast();
+            
+            agregarCarrito(producto.id);
+    });
+})
+}
+productos()
+}
+mostrarDatos()
+
+// const agregarCarrito = (prodId) => {
+//     const existe = carrito.some((producto) => producto.id === prodId);
+
+//     if (existe) {
+//         productos = carrito.map((producto) => {
+//             if (producto.id === prodId) {
+//                 producto.cantidad++;
+//             }
+//         });
+//     } else {
+//         const item = productos.find((producto) => producto.id === prodId);
+//         carrito.push(item);
+//         console.log(carrito);
+//     }
+//     actualizarCarrito();
+// };
+
+// const eliminarDelCarrito = (prodId) => {
+//     const item = carrito.find((producto) => producto.id === prodId);
+//     const indice = carrito.indexOf(item);
+//     carrito.splice(indice, 1);
+//     actualizarCarrito();
+// };
 
 
 
