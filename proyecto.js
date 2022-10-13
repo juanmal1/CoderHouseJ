@@ -11,12 +11,12 @@ const precioCuotas = document.getElementById("cuotas");
 
 /*----storage carrito-----*/
 
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-console.log(carrito);
+// let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+// console.log(carrito);
 
-if (carrito != []) {
-    actualizarCarrito();
-}
+// if (carrito != []) {
+//     actualizarCarrito();
+// }
 
 /*-------------CARRITO-------------*/
 function actualizarCarrito() {
