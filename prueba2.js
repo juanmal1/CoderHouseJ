@@ -53,7 +53,7 @@ function actualizarCarrito() {
 
     contadorCarrito.innerText = carrito.length;
 
-    localStorage.setItem(carrito, JSON.stringify(carrito));
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 
     console.log(carrito);
     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0);
