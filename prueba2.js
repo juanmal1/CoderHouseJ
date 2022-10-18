@@ -1,3 +1,19 @@
+class producto {
+    constructor(producto, id, cantidad, imagen, precio, stock) {
+        this.producto = producto;
+        this.id = id;
+        this.cantidad = cantidad;
+        this.imagen = imagen;
+        this.precio = precio;
+        this.stock = stock;
+    }
+}
+
+/*-----------------------------PRODUCTOS-----------------*/
+const producto1 = new producto("Top Cat", 1, 1, "./media/SofiLBdia1win20220138rew_720x.webp", 14850, 2);
+const producto2 = new producto("Top ido", 2, 1, "./media/sofia-Lb-dia-4--win-225639_720x.webp", 15850, 1);
+const producto3 = new producto("Top Cat B", 3, 1, "./media/SofiLBdia2Win20232660rew_720x.webp", 12850, 3);
+
 /*-----------ID traidos del html---------*/
 
 const contenedorCarrito = document.getElementById("carrito-contenedor");
@@ -9,10 +25,11 @@ const cantidadTotal = document.getElementById("cantidadTotal");
 const comprar = document.getElementById("comprar");
 const precioCuotas = document.getElementById("cuotas");
 
+
 /*----storage carrito-----*/
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-console.log(carrito);
+
 
 if (carrito != []) {
     actualizarCarrito();
@@ -21,56 +38,31 @@ if (carrito != []) {
 /*-------------CARRITO-------------*/
 function actualizarCarrito() {
     contenedorCarrito.innerHTML = "";
-    
+    console.log(carrito);
     carrito.forEach((producto) => {
         const div = document.createElement("div");
         div.className = "productoEnCarrito";
         div.innerHTML = `
-        <p>${producto.nombre}</p>
-        ${producto.nombre}
+        <p>${producto.producto}</p>
         <p>Precio: $${producto.precio}</p>
         <p>Cantidad: <span id="cantidad">${producto.cantidad}</span></p>
-        <button onclick = "eliminarDelCarrito (${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+        <button onclick = "eliminarDelCarrito(${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
         `;
         contenedorCarrito.appendChild(div);
     });
 
     contadorCarrito.innerText = carrito.length;
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem(carrito, JSON.stringify(carrito));
 
-
+    console.log(carrito);
     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0);
 
-    precioCuotas.innerText = carrito.reduce((acc, producto) => acc + producto.precio / 12, 0).toFixed()
+    precioCuotas.innerText = carrito.reduce((acc, producto) => acc + producto.precio / 12, 0)
 }
 
-
-
 const productos = [];
-/*---------------- AGREGAR O QUITAR DEL CARRITO--------------------*/
-const agregarCarrito = (prodId) => {
-    const existe = carrito.some((producto) => producto.id === prodId);
 
-    if (existe) {
-        productos = carrito.map((producto) => {
-            if (producto.id === prodId) {
-                producto.cantidad++;
-            }
-        });
-    } else {
-        const item = productos.find((producto) => producto.id === prodId);
-        carrito.push(item);
-    }
-    actualizarCarrito();
-};
-
-const eliminarDelCarrito = (prodId) => {
-    const item = carrito.find((producto) => producto.id === prodId);
-    const indice = carrito.indexOf(item);
-    carrito.splice(indice, 1);
-    actualizarCarrito();
-};
 /*------------- evento dentro del carrito--------*/
 comprar.addEventListener("click", () => {
     Swal.fire({
@@ -95,53 +87,84 @@ botonVaciar.addEventListener("click", () => {
     actualizarCarrito();
 });
 
+productos.push(producto1);
+productos.push(producto2);
+productos.push(producto3);
 
 /*---------------- NODO PRODUCTOS------------*/
-function mostrarDatos (){
-
+function mostrarProductos(productos) {
     const contenedorProductos = document.getElementById("contenedor-productos");
 
     contenedorProductos.innerHTML = "";
 
-    fetch('./data.json')
-    .then(respuesta=> respuesta.json())
-    .then(productos=> {
-        productos.forEach(producto => {
-            const divProducto = document.createElement("div");
-            divProducto.classList.add("caja");
-            divProducto.innerHTML = `
-            <img src="${producto.img}" alt="${producto.img}">
-            <p>${producto.nombre}</p>
-            <p> Precio : $${producto.precio}</p>
-            <p> Stock: ${producto.stock}</p>
-            <button id="agregar ${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
-            `;
-    
-            contenedorProductos.appendChild(divProducto);
-    
-            const boton = document.getElementById(`agregar ${producto.id}`);
-    
-            boton.addEventListener("click", () => {
-                Toastify({
-                    text: "Agregaste el producto al carrito",
-                    duration: 2500,
-                    newWindow: true,
-                    close: true,
-                    gravity: "top", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                    background: "linear-gradient(to right, #000000, #771a53be)",
-                    },
-                    onClick: function(){} // Callback after click
-                }).showToast();
-                
-                agregarCarrito(producto.id);
+    productos.forEach((producto) => {
+        const divProducto = document.createElement("div");
+        divProducto.classList.add("caja");
+        divProducto.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.producto}">
+        <p>${producto.producto}</p>
+        <p> Precio : $${producto.precio}</p>
+        <p> Stock: ${producto.stock}</p>
+        <button id="agregar ${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+        `;
+
+        contenedorProductos.appendChild(divProducto);
+
+        const boton = document.getElementById(`agregar ${producto.id}`);
+
+        boton.addEventListener("click", () => {
+            Toastify({
+                text: "Agregaste el producto al carrito",
+                duration: 2500,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                background: "linear-gradient(to right, #000000, #771a53be)",
+                },
+                onClick: function(){} // Callback after click
+            }).showToast();
+            agregarCarrito(producto.id);
+
         });
-    })
-})
+    });
 }
-mostrarDatos();
+mostrarProductos(productos);
+
+/*---------------- AGREGAR O QUITAR DEL CARRITO--------------------*/
+const agregarCarrito = (prodId) => {
+    const existe = carrito.some((producto) => producto.id === prodId);
+
+    if (existe) {
+        producto = carrito.map((producto) => {
+            if (producto.id === prodId) {
+                producto.cantidad++;
+            }
+        });
+    } else {
+        const item = productos.find((producto) => producto.id === prodId);
+        carrito.push(item);
+    }
+    actualizarCarrito();
+};
+
+const eliminarCarrito = (prodId) => {
+    const item = carrito.find((producto) => producto.id === prodId);
+    const indice = carrito.indexOf(item);
+    carrito.splice(indice, 1);
+    actualizarCarrito();
+};
+
+// function guardar() {
+//     let data = localStorage.getItem("carrito");
+//     let devolverCarrito = JSON.parse(data);
+// }cS
+
+
+
+
 /*--------Publicidad rapida----------*/
 
 Toastify({
