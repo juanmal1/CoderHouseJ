@@ -11,12 +11,12 @@ const precioCuotas = document.getElementById("cuotas");
 
 /*----storage carrito-----*/
 
-// let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-// console.log(carrito);
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+console.log(carrito);
 
-// if (carrito != []) {
-//     actualizarCarrito();
-// }
+if (carrito != []) {
+    actualizarCarrito();
+}
 
 /*-------------CARRITO-------------*/
 function actualizarCarrito() {
@@ -27,7 +27,6 @@ function actualizarCarrito() {
         div.className = "productoEnCarrito";
         div.innerHTML = `
         <p>${producto.nombre}</p>
-        ${producto.nombre}
         <p>Precio: $${producto.precio}</p>
         <p>Cantidad: <span id="cantidad">${producto.cantidad}</span></p>
         <button onclick = "eliminarDelCarrito (${producto.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>

@@ -55,7 +55,8 @@ function actualizarCarrito() {
 
     localStorage.setItem('carrito', JSON.stringify(carrito));
 
-    console.log(carrito);
+
+
     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0);
 
     precioCuotas.innerText = carrito.reduce((acc, producto) => acc + producto.precio / 12, 0)
@@ -150,7 +151,7 @@ const agregarCarrito = (prodId) => {
     actualizarCarrito();
 };
 
-const eliminarCarrito = (prodId) => {
+const eliminarDelCarrito = (prodId) => {
     const item = carrito.find((producto) => producto.id === prodId);
     const indice = carrito.indexOf(item);
     carrito.splice(indice, 1);
